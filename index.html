@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+      body, html {
+        min-width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        font: Arial 14px;
+      }
+    </style>
+    <!--<link rel="stylesheet" href="style.css"/>-->
+    <!--<script defer src="script.js"></script>-->
+  </head><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #2980b9, #6dd5fa, #ffffff);
+      background-size: 200% auto;
+      animation: gradientBG 5s linear infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .board {
+      display: inline-block;
+      margin-top: 50px;
+    }
+
+    .row {
+      clear: both;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      border: 3px solid #ffffff;
+      float: left;
+      box-sizing: border-box;
+      font-size: 60px;
+      line-height: 100px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cell:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .cell:active {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cell.X {
+      color: #3498db;
+    }
+
+    .cell.O {
+      color: #e74c3c;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="board" id="board">
+    <div class="row">
+      <div class="cell" id="cell-0" onclick="placeMark(0)"></div>
+      <div class="cell" id="cell-1" onclick="placeMark(1)"></div>
+      <div class="cell" id="cell-2" onclick="placeMark(2)"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="cell-3" onclick="placeMark(3)"></div>
+      <div class="cell" id="cell-4" onclick="placeMark(4)"></div>
+      <div class="cell" id="cell-5" onclick="placeMark(5)"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="cell-6" onclick="placeMark(6)"></div>
+      <div class="cell" id="cell-7" onclick="placeMark(7)"></div>
+      <div class="cell" id="cell-8" onclick="placeMark(8)"></div>
+    </div>
+  </div>
+  <div class="info" id="info"></div>
+
+  <script>
+    let currentPlayer = "X";
+    let cells = document.querySelectorAll(".cell");
+    let info = document.getElementById("info");
+
+    function placeMark(cellIndex) {
+      let cell = cells[cellIndex];
+      if (!cell.textContent) {
+        cell.textContent = currentPlayer;
+        cell.classList.add(currentPlayer);
+        if (checkWin()) {
+          info.textContent = currentPlayer + " wins!";
+          disableCells();
+          return;
+        }
+        if (checkDraw()) {
+          info.textContent = "It's a draw!";
+          return;
+        }
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        info.textContent = "Current player: " + currentPlayer;
+      }
+    }
+
+    function checkWin() {
+      const winningCombinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // horizontal
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // vertical
+        [0, 4, 8], [2, 4, 6]             // diagonal
+      ];
+
+      return winningCombinations.some(combination => {
+        const [a, b, c] = combination;
+        return cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent;
+      });
+    }
+
+    function checkDraw() {
+      return [...cells].every(cell => cell.textContent);
+    }
+
+    function disableCells() {
+      cells.forEach(cell => cell.onclick = null);
+    }
+  </script>
+</body>
+</html>
+  <body>
+    
+  </body>
+</html>
